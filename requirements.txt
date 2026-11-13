@@ -1,8 +1,5 @@
-# 调度器 crypto_attack_machine.py 只用标准库，无需安装任何依赖。
-# 下面这些是"执行攻击"时需要的，请装到 SageMath 的 python 环境里：
-#
 #   sage -pip install -r requirements.txt
 #
-# SageMath 本身不能用 pip 安装，请从 https://www.sagemath.org/download.html 获取。
+# SageMath 从 https://www.sagemath.org/download.html 获取。
 
 pycryptodome>=3.9        # 分组模式攻击（CBC/CTR/ECB/IGE/GCM/RC4 等测试与示例）
