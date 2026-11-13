@@ -1,0 +1,14 @@
+__pycache__/
+.pytest_cache/
+*.py[cod]
+
+.idea
+.vscode/
+.DS_Store
+
+# 调度器 --keep 保存的运行脚本
+runs/
+
+# 虚拟环境
+.venv/
+venv/
