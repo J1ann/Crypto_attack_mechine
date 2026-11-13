@@ -190,8 +190,12 @@ JSON 只有数字/字符串/数组/对象，而攻击参数里有字节串、大
 方便在脚本里判断：
 
 ```bash
-if python crypto_attack_machine.py run rsa/wiener_attack --params "$P" --params-file p.json; then
-    echo "打穿了"; else echo "参数不对，或需要调大 m/t"; fi
+python crypto_attack_machine.py run rsa/wiener_attack --params-file p.json
+if [ $? -eq 0 ]; then
+    echo "打穿了"
+else
+    echo "没打出来：参数不对，或需要调大 m/t"
+fi
 ```
 
 ### `interactive` —— 交互式菜单
