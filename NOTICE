@@ -1,0 +1,18 @@
+Crypto Attack Machine
+Copyright 2024 The Crypto_attack_mechine contributors
+
+This product includes software developed at
+J1ann/crypto-attacks (https://github.com/J1ann/crypto-attacks),
+Copyright (c) 2020 Joachim Vandersmissen,
+licensed under the MIT License (see LICENSE-UPSTREAM).
+
+The following directories are copied verbatim from that project and remain
+under the MIT License:
+
+    attacks/
+    shared/
+    test/
+
+Everything else in this repository -- crypto_attack_machine.py, examples/,
+docs/, README.md and the accompanying configuration files -- is licensed
+under the Apache License, Version 2.0 (see LICENSE).

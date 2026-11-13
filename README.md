@@ -456,7 +456,9 @@ Crypto_attack_mechine/
 │   ├── ATTACK_PARAMETERS.md     # 自动生成：逐参数手册
 │   └── UPSTREAM_README.md       # 上游项目原始 README（含 46 条参考文献）
 ├── requirements.txt
-└── LICENSE
+├── LICENSE                      # Apache-2.0（本仓库新增部分）
+├── LICENSE-UPSTREAM             # MIT（attacks/ shared/ test/ 原始许可）
+└── NOTICE                       # 归属声明
 ```
 
 ## 新增一个攻击
@@ -529,7 +531,15 @@ python crypto_attack_machine.py test rsa/wiener_attack
 
 ## 许可与致谢
 
-- 攻击实现与测试来自 [J1ann/crypto-attacks](https://github.com/J1ann/crypto-attacks)，
-  原作者 Joachim Vandersmissen，MIT License，见 [`LICENSE`](LICENSE)；
-  原始 README（含每个攻击对应的论文清单）保留在 [`docs/UPSTREAM_README.md`](docs/UPSTREAM_README.md)。
-- 本仓库在其之上增加了统一调度器 `crypto_attack_machine.py`、示例与文档，同样以 MIT License 发布。
+本仓库是两部分拼起来的，许可证也相应分成两块：
+
+| 范围 | 来源 | 许可 |
+| --- | --- | --- |
+| `attacks/`、`shared/`、`test/` | [J1ann/crypto-attacks](https://github.com/J1ann/crypto-attacks)，作者 Joachim Vandersmissen，原样拷贝 | **MIT**，见 [`LICENSE-UPSTREAM`](LICENSE-UPSTREAM) |
+| `crypto_attack_machine.py`、`examples/`、`docs/`、`README.md` | 本仓库新增 | **Apache-2.0**，见 [`LICENSE`](LICENSE) |
+
+完整归属声明见 [`NOTICE`](NOTICE)。上游 README（含每个攻击对应的论文清单，46 条参考文献）
+保留在 [`docs/UPSTREAM_README.md`](docs/UPSTREAM_README.md)，便于溯源。
+
+如果这份代码帮到了你，请也给上游项目点个 star。
+
