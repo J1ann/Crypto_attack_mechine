@@ -1,27 +1,5 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""
-Crypto Attack Machine —— 密码学攻击统一调度器
-==============================================
-
-把 `attacks/` 目录下的所有攻击集中到一个可交互 / 可脚本化的入口：
-
-    python crypto_attack_machine.py list                # 列出全部攻击
-    python crypto_attack_machine.py info rsa/boneh_durfee
-    python crypto_attack_machine.py run rsa/wiener_attack --demo
-    python crypto_attack_machine.py run cbc/bit_flipping --params '{"iv":"hex:00"*16 ...}'
-    python crypto_attack_machine.py interactive         # 交互式菜单
-
-本脚本只依赖标准库，可以放心用系统的普通 python3 运行；
-真正执行攻击时会自动切换到 SageMath 的 python（`sage -python`），
-因为绝大多数攻击依赖 `sage.all`（格约减、多项式环、椭圆曲线等）。
-
-退出码约定：
-    0  成功
-    1  攻击执行了但没有得到结果（返回 None）或测试失败
-    2  用法 / 环境错误
-    130 用户中断
-"""
 
 from __future__ import annotations
 
