@@ -12,10 +12,6 @@ $ python crypto_attack_machine.py run rsa/wiener_attack --demo
 **73 个攻击 / 22 个分类**，全部保留原始实现（RSA、格攻击、分组模式、ECC、LCG、LWE、背包、Shamir……），
 外加一个零依赖的 Python 调度器 `crypto_attack_machine.py`。
 
-> ⚠️ **免责声明**
-> 本仓库仅供**教学、CTF 竞赛与授权安全研究**使用。所有代码都是公开论文中密码分析方法的实现，
-> 请勿用于攻击你未获授权的系统或数据。使用者需自行承担因不当使用产生的一切后果。
-
 ---
 
 ## 目录
@@ -29,7 +25,6 @@ $ python crypto_attack_machine.py run rsa/wiener_attack --demo
 - [新增一个攻击](#新增一个攻击)
 - [关于 `m` / `t` 参数](#关于-m--t-参数)
 - [测试](#测试)
-- [许可与致谢](#许可与致谢)
 
 ---
 
@@ -532,18 +527,4 @@ python crypto_attack_machine.py test rsa/wiener_attack
 ```
 
 全部用例通常几分钟内跑完，具体取决于机器性能与格攻击的规模。
-
-## 许可与致谢
-
-本仓库是两部分拼起来的，许可证也相应分成两块：
-
-| 范围 | 来源 | 许可 |
-| --- | --- | --- |
-| `attacks/`、`shared/`、`test/` | [J1ann/crypto-attacks](https://github.com/J1ann/crypto-attacks)，作者 Joachim Vandersmissen，原样拷贝 | **MIT**，见 [`LICENSE-UPSTREAM`](LICENSE-UPSTREAM) |
-| `crypto_attack_machine.py`、`examples/`、`docs/`、`README.md` | 本仓库新增 | **Apache-2.0**，见 [`LICENSE`](LICENSE) |
-
-完整归属声明见 [`NOTICE`](NOTICE)。上游 README（含每个攻击对应的论文清单，46 条参考文献）
-保留在 [`docs/UPSTREAM_README.md`](docs/UPSTREAM_README.md)，便于溯源。
-
-如果这份代码帮到了你，请也给上游项目点个 star。
 
