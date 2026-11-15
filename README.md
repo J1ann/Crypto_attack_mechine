@@ -23,6 +23,7 @@ $ python crypto_attack_machine.py run rsa/wiener_attack --demo
 - [新增一个攻击](#新增一个攻击)
 - [关于 `m` / `t` 参数](#关于-m--t-参数)
 - [测试](#测试)
+- [贡献者](#贡献者)
 
 ---
 
@@ -441,3 +442,15 @@ sage -python -m unittest discover -s test -t . -v
 sage -python -m unittest -v test.test_rsa            
 python crypto_attack_machine.py test rsa/wiener_attack
 ```
+
+## 贡献者
+
+感谢所有为本项目提交代码、测试与文档改进的朋友：
+
+| 贡献者 | 贡献 |
+| --- | --- |
+| [@J1ann](https://github.com/J1ann) | 项目作者：统一调度器、攻击整合、文档与测试框架 |
+| [@XinyiYu-XJTU](https://github.com/XinyiYu-XJTU) | 修订 README 安装说明，明确 PyCryptodome 的安装与用途（[#1](https://github.com/J1ann/Crypto_attack_mechine/pull/1)） |
+| [@Duanzhoutao](https://github.com/Duanzhoutao) | 为 `PartialInteger` 补单元测试并修复 `parse_be` 自递归（[#2](https://github.com/J1ann/Crypto_attack_mechine/pull/2)） |
+
+完整名单与说明见 [CONTRIBUTORS.md](CONTRIBUTORS.md)。
