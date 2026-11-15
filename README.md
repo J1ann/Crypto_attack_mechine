@@ -38,11 +38,6 @@ $ python crypto_attack_machine.py run rsa/wiener_attack --demo
 sage -python --version     # 期望 >= Python 3.9
 ```
 
-Windows 上的原生安装版会把 `sage.bat` 放在 `C:\Program Files\SageMath <版本>\runtime\bin\`，
-若不在 `PATH` 中，用 `--sage` 指定即可：
-
-```bash
-python crypto_attack_machine.py doctor --sage "C:/Program Files/SageMath 10.4/runtime/bin/sage.bat"
 ```
 
 ### 2. PyCryptodome（分组模式攻击需要）
