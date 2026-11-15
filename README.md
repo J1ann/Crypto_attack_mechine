@@ -57,7 +57,6 @@ sage -pip install pycryptodome
 python crypto_attack_machine.py doctor
 ```
 
-输出会告诉你：调度器 Python 版本、SageMath 位置、`sage -python` 版本、PyCryptodome 是否可用、攻击总数。
 
 ## 快速开始
 
@@ -65,21 +64,21 @@ python crypto_attack_machine.py doctor
 git clone https://github.com/J1ann/Crypto_attack_mechine.git
 cd Crypto_attack_mechine
 
-# 1) 看有什么
+# 1) 
 python crypto_attack_machine.py list
 
-# 2) 跑一个内置演示（真实参数，来自 test/ 用例）
+# 2) 
 python crypto_attack_machine.py run rsa/wiener_attack --demo
 
-# 3) 换成你自己的参数
+# 3) 
 python crypto_attack_machine.py run rsa/wiener_attack --params '{"N": 90581, "e": 17993}'
 
-# 4) 不知道参数长什么样？先看说明，再生成模板
+# 4) 
 python crypto_attack_machine.py info rsa/boneh_durfee
 python crypto_attack_machine.py run rsa/boneh_durfee --template > poc.py
 ```
 
-想看全部命令：
+
 
 ```bash
 python crypto_attack_machine.py --help
@@ -87,77 +86,41 @@ python crypto_attack_machine.py --help
 
 ## 调度器用法
 
-### `list` —— 列出全部攻击
+### `list` 
 
 ```bash
-python crypto_attack_machine.py list            # 按分类列出，标记是否有内置演示
-python crypto_attack_machine.py list -v         # 附带一句话说明
-python crypto_attack_machine.py list --json     # 结构化输出，供脚本消费
+python crypto_attack_machine.py list            
+python crypto_attack_machine.py list -v         
+python crypto_attack_machine.py list --json     
 ```
 
-`✓ demo` 表示该攻击有可跑通的单元测试用例，`[N 入口]` 表示该文件里有多个公开函数
-（例如 `factorization/branch_and_prune` 有 `factorize_pq` / `factorize_pqd` / `factorize_pqddpdq`）。
 
-### `search` / `info` —— 查参数
+### `search` / `info` 
 
 ```bash
 python crypto_attack_machine.py search lattice
 python crypto_attack_machine.py info rsa/boneh_durfee
 ```
 
-`info` 会给出：源码路径、是否依赖 Sage、对应测试、每个入口函数的签名、每个参数的含义（必填/默认值）、
-论文出处、返回值说明，以及可直接复制的示例命令。
 
-### `run` —— 执行攻击
-
-三种模式，任选其一：
-
-| 模式 | 命令 | 适用场景 |
-| --- | --- | --- |
-| 内置演示 | `run <key> --demo` | 想确认它能跑通、看输出长什么样（**默认行为**） |
-| 自定义参数 | `run <key> --params '{...}'` 或 `--params-file p.json` | 参数是整数/字符串/字节 |
-| 自定义脚本 | `run <key> --script my_poc.py` | 参数是预言机、矩阵、椭圆曲线点等复杂对象 |
+### `run` 
 
 ```bash
-# 内置演示：直接复用 test/ 下的真实用例
 python crypto_attack_machine.py run rsa/known_d --demo
 
-# 自定义参数：JSON 键名即函数形参名
 python crypto_attack_machine.py run rsa/common_modulus \
   --params '{"n": 123456789, "e1": 3, "c1": 111, "e2": 65537, "c2": 222}'
 
-# 参数太长就放文件
 python crypto_attack_machine.py run rsa/partial_key_exposure --params-file params.json
 
-# 多入口模块指定函数
 python crypto_attack_machine.py run factorization/branch_and_prune \
   --entry factorize_pqd --params '{"N": 0, "e": 0, "p": 0, "q": 0, "d": 0}'
 
-# 想把自动生成的运行脚本留下来复现
 python crypto_attack_machine.py run rsa/wiener_attack --params '{...}' --keep
 ```
 
-#### 参数编码约定
-
-JSON 只有数字/字符串/数组/对象，而攻击参数里有字节串、大整数、Sage 对象。用以下前缀表达：
-
-| 写法 | 转换结果 | 例子 |
-| --- | --- | --- |
-| `123` / `"123"` | 整数 | `{"N": 90581}` |
-| `"hex:00ff10"` | `bytes` | `{"iv": "hex:00000000000000000000000000000000"}` |
-| `"bytes:hello"` | `bytes`（UTF-8） | `{"p": "bytes:admin=0"}` |
-| `"b64:AAECAw=="` | `bytes`（Base64） | 二进制密文 |
-| `"@json:[1,2,3]"` | 解析内层 JSON | 嵌套结构 |
-| `"@eval:Matrix(ZZ, [[1,2],[3,4]])"` | 在 Sage 环境中 `eval` | 矩阵、曲线点、`PartialInteger(...)` |
-
-`@eval:` 是逃生舱口：它会生成 `from sage.all import *` 的脚本再 eval，所以可以直接写
-`"@eval:EllipticCurve(GF(101), [1, 1])(3, 6)"` 这类表达式。
 
 #### 运行结果
-
-成功时调度器会打印耗时与返回值；攻击返回 `None`（表示没打出来）时退出码为 `1`，
-方便在脚本里判断：
-
 ```bash
 python crypto_attack_machine.py run rsa/wiener_attack --params-file p.json
 if [ $? -eq 0 ]; then
@@ -167,52 +130,27 @@ else
 fi
 ```
 
-### `interactive` —— 交互式菜单
-
-不带任何子命令直接运行，或显式使用：
-
+### `interactive` 
 ```bash
 python crypto_attack_machine.py interactive
 ```
 
-```text
-==================================================================
-  Crypto Attack Machine · 交互模式
-==================================================================
-   1. ACD · 近似公因数                    3 个
-   2. CBC 分组模式                        3 个
-  ...
-  21. RSA                               21 个
-  22. Shamir 秘密共享                    2 个
-   0. 退出
 
-选择分类编号（或直接输入攻击键、关键词搜索）>
-```
 
-选中攻击后可：跑演示 / 输入 JSON 参数 / 打印并保存调用模板 / 查看参数说明。
 
-### `test` —— 跑测试套件
+### `test` 
 
 ```bash
-python crypto_attack_machine.py test                       # 全部用例（几分钟）
-python crypto_attack_machine.py test rsa/wiener_attack     # 单个攻击对应的用例
+python crypto_attack_machine.py test                       
+python crypto_attack_machine.py test rsa/wiener_attack    
 ```
 
-### `docs` —— 重新生成文档
+### `docs` 
 
 ```bash
-python crypto_attack_machine.py docs            # 生成 docs/ATTACKS.md 与 docs/ATTACK_PARAMETERS.md
-python crypto_attack_machine.py docs --readme   # 同时刷新本 README 的「攻击总览」区块
+python crypto_attack_machine.py docs            
+python crypto_attack_machine.py docs --readme   
 ```
-
-### 退出码
-
-| 码 | 含义 |
-| --- | --- |
-| `0` | 成功 |
-| `1` | 攻击跑完了但返回 `None`（未成功），或测试失败 |
-| `2` | 用法/环境错误（参数缺失、JSON 非法、找不到 Sage 等） |
-| `130` | 用户中断（Ctrl+C） |
 
 ## 攻击总览
 
@@ -469,7 +407,6 @@ Crypto_attack_mechine/
 ## 关于 `m` / `t` 参数
 
 格攻击（Boneh-Durfee、Coppersmith、隐式分解、HNP、ACD 等）都靠 `m` 和 `t` 调整格的大小：
-格越大，LLL 越慢，但成功概率越高；太小则可能白算一场。上游给的两种用法：
 
 ```python
 # 1) 从小到大试，直到打出来
@@ -487,7 +424,7 @@ attack(..., m=3)
 调度器里对应的做法：
 
 ```bash
-python crypto_attack_machine.py run rsa/boneh_durfee --demo        # 先看内置用例里 m 取多少能过
+python crypto_attack_machine.py run rsa/boneh_durfee --demo        
 python crypto_attack_machine.py run rsa/boneh_durfee --params '{..., "m": 3}'
 python crypto_attack_machine.py run rsa/boneh_durfee --params '{...}' --timeout 600
 ```
@@ -495,10 +432,7 @@ python crypto_attack_machine.py run rsa/boneh_durfee --params '{...}' --timeout 
 ## 测试
 
 ```bash
-sage -python -m unittest discover -s test -t . -v    # 全部
-sage -python -m unittest -v test.test_rsa            # 单个模块
+sage -python -m unittest discover -s test -t . -v    
+sage -python -m unittest -v test.test_rsa            
 python crypto_attack_machine.py test rsa/wiener_attack
 ```
-
-全部用例通常几分钟内跑完，具体取决于机器性能与格攻击的规模。
-
