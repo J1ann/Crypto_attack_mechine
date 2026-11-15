@@ -31,16 +31,20 @@ $ python crypto_attack_machine.py run rsa/wiener_attack --demo
 
 ### 1. SageMath（必需）
 
-绝大多数攻击依赖 `sage.all`（LLL、多项式环、椭圆曲线、`Qp` 等），所以必须装 SageMath。
+大多数攻击实现依赖 SageMath 提供的数学计算功能，例如 LLL、 多项式环、椭圆曲线和高精度数域。因此，运行攻击前需要安装 SageMath。
+
+安装完成后，可以通过以下命令检查：
 
 ```bash
-# 检查是否已安装
-sage -python --version     # 期望 >= Python 3.9
+sage --version
+sage -python --version
 ```
 
-```
+建议使用 `sage -python` 运行调度器，以确保攻击脚本能够使用 SageMath 的 Python 环境。
 
-### 2. PyCryptodome（分组模式攻击需要）
+### 2. PyCryptodome（部分攻击需要）
+
+部分分组密码攻击依赖 PyCryptodome。可以通过 SageMath 自带的 pip 安装：
 
 ```bash
 sage -pip install pycryptodome
@@ -48,8 +52,14 @@ sage -pip install pycryptodome
 
 ### 3. 验证环境
 
+运行以下命令检查运行环境：
+
 ```bash
-python crypto_attack_machine.py doctor
+sage -python crypto_attack_machine.py doctor
+```
+
+如果环境检查未通过，请根据提示安装缺失的依赖。
+
 ```
 
 
