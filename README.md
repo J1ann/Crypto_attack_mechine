@@ -42,7 +42,7 @@ sage -python --version
 
 建议使用 `sage -python` 运行调度器，以确保攻击脚本能够使用 SageMath 的 Python 环境。
 
-### 2. PyCryptodome（部分攻击需要）
+### 2. PyCryptodome
 
 部分分组密码攻击依赖 PyCryptodome。可以通过 SageMath 自带的 pip 安装：
 
