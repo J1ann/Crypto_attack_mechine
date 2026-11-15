@@ -36,13 +36,6 @@ $ python crypto_attack_machine.py run rsa/wiener_attack --demo
 ```bash
 # 检查是否已安装
 sage -python --version     # 期望 >= Python 3.9
-
-# 官方安装包 / 包管理器
-#   macOS:   brew install --cask sage
-#   Ubuntu:  sudo apt install sagemath
-#   Windows: https://www.sagemath.org/download-windows.html （或使用 WSL2 安装 Linux 版）
-#   其他:    https://www.sagemath.org/download.html
-#   也可以直接用 Docker: docker run -it --rm -v "$PWD":/work sagemath/sagemath:latest
 ```
 
 Windows 上的原生安装版会把 `sage.bat` 放在 `C:\Program Files\SageMath <版本>\runtime\bin\`，
